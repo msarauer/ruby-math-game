@@ -1,13 +1,14 @@
 # class game - generate random numbers, store the question, check the score, store the correct and incorrect responses
 class Computer
   
-  attr_reader :question, :solution, :turn, :question
+  attr_reader :question, :solution, :current_player
 
   def initialize
     @numbers = []
     @question = ""
     @turn = 1
     @solution = 0
+    @current_player = "p1"
   end
 
   def random_numbers
@@ -21,8 +22,12 @@ class Computer
 
   def next_turn
     @turn = 3 - @turn
+    @current_player = "p#{turn}"
   end
-    
+
+  def compare(guess)
+    guess === @solution
+  end
 
 end
 
