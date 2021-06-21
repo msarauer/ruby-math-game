@@ -3,12 +3,13 @@ class Computer
   
   attr_reader :question, :solution, :current_player
 
-  def initialize
+  def initialize(players)
     @numbers = []
     @question = ""
-    @turn = 1
+    @turn = 0
     @solution = 0
-    @current_player = "p1"
+    @current_player = players[@turn]
+    @players = players
   end
 
   def random_numbers
@@ -16,16 +17,13 @@ class Computer
     @question = "What does #{ @numbers[0] } plus #{ @numbers[1] } equal?"
   end
 
-  def solution
-    @solution = @numbers.reduce(0, :+)
-  end
-
   def next_turn
-    @turn = 3 - @turn
-    @current_player = "p#{turn}"
+    @turn = 1 - @turn
+    @current_player = @players[@turn]
   end
 
   def compare(guess)
+    @solution = @numbers.reduce(0, :+)
     guess === @solution
   end
 
